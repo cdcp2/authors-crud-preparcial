@@ -57,4 +57,17 @@ npm run dev
 # 3) Abre en el navegador
 # http://localhost:3000/authors
 ```
-# Parte A
+## Parte A - Favoritos
+- Hay un botón Favorito en cada autor
+- Vista `/favoritos` que muestra solo los marcados
+- Indicador visual: junto al nombre
+
+
+## Parte B — Accesibilidad
+- Navegación con teclado: todos los controles son `<button>`/`<a>`, foco visible por defecto del navegador
+- ARIA en botones:
+  - Favoritos usa `aria-pressed="true|false"` y `aria-label` descriptivo
+  - Botones Editar/Eliminar con `aria-label` por autor
+- Formulario:
+  - `aria-invalid` y `aria-describedby` en `name` cuando hay error
+  - Mensajes de error con `role="alert"`
