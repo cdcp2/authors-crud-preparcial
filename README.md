@@ -41,7 +41,7 @@ App hecha con **Next.js (App Router)** que consume el API de `bookstore-back` pa
 > **Nota**: El proyecto usa un rewrite para que las llamadas del frontend a `/api/authors` vayan al servidor real del backend en `127.0.0.1:8080`.
 ---
 
-## ▶️ Cómo correr la app (frontend)
+## Cómo correr la app (frontend)
 
 **Requisitos**:
 - Node 18+ (recomendado LTS)
@@ -56,5 +56,5 @@ npm run dev
 
 # 3) Abre en el navegador
 # http://localhost:3000/authors
-
-
+```
+# Parte A
