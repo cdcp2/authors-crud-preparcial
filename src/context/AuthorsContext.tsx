@@ -12,6 +12,11 @@ type AuthorsContextType = {
   create: (payload: NewAuthor) => Promise<void>;
   update: (id: number, payload: Partial<Author>) => Promise<void>;
   remove: (id: number) => Promise<void>;
+
+
+  favorites: number[];                   
+  isFavorite: (id: number) => boolean;
+  toggleFavorite: (id: number) => void;
 };
 
 const AuthorsContext = createContext<AuthorsContextType | undefined>(undefined);
@@ -20,6 +25,9 @@ export function AuthorsProvider({ children }: { children: ReactNode }) {
   const [authors, setAuthors] = useState<Author[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+
+  const [favorites, setFavorites] = useState<number[]>([]);
 
   const refresh = async () => {
     try {
@@ -51,10 +59,20 @@ export function AuthorsProvider({ children }: { children: ReactNode }) {
   const remove = async (id: number) => {
     await deleteAuthor(id);
     setAuthors((prev) => prev.filter((a) => a.id !== id));
+    setFavorites((prev) => prev.filter((fid) => fid !== id)); 
   };
 
+  const isFavorite = (id: number) => favorites.includes(id);
+  const toggleFavorite = (id: number) =>
+    setFavorites((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
+
   return (
-    <AuthorsContext.Provider value={{ authors, loading, error, refresh, create, update, remove }}>
+    <AuthorsContext.Provider
+      value={{
+        authors, loading, error, refresh, create, update, remove,
+        favorites, isFavorite, toggleFavorite,
+      }}
+    >
       {children}
     </AuthorsContext.Provider>
   );
